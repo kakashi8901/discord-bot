@@ -1,0 +1,80 @@
+import discord
+from discord import guild
+from discord.ext import commands
+
+import json
+import asyncio
+import io
+
+import random
+from urllib import parse, request
+import requests
+
+bot = commands.Bot(command_prefix='$', description='fun bot')
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send('pong')
+
+@bot.command()
+async def sum(ctx, numOne: int, numTwo: int):
+    await ctx.send(numOne + numTwo)
+
+@bot.command()
+async def info(ctx):
+    embed = discord.Embed(title=f"{ctx.guild.name}", description="friend's hangout", color=discord.Color.blue())
+    embed.add_field(name="Server created at", value=f"{ctx.guild.created_at}")
+    embed.add_field(name="tharun reddy", value=f"{ctx.guild.owner}")
+    embed.add_field(name="india", value=f"{ctx.guild.region}")
+    # embed.set_thumbnail(url=f"{ctx.guild.icon}")
+    embed.set_thumbnail(url="https://c4.wallpaperflare.com/wallpaper/511/504/893/makoto-shinkai-kimi-no-na-wa-wallpaper-preview.jpg")
+
+    await ctx.send(embed=embed)
+
+@bot.command()
+async def say(ctx, *, arg):
+    await ctx.send(arg)
+
+# @bot.command()
+# async def slap( ctx, member : discord.Member ):
+#     list = ['https://tenor.com/view/slap-annoyed-irritated-kid-gif-5013065','https://tenor.com/view/kevin-hart-slap-face-your-charlie-gif-10570690', 'https://tenor.com/view/back-slap-backhand-funny-animals-penguin-slap-gif-11724800'
+#    ]
+#     random_list = random.choice(list)
+#     emb = discord.Embed(title=None, description = f" {ctx.author.mention} slaps {member.mention} in the face!", color=0x3498db)
+#     emb.set_image(url = random_list)
+#     await ctx.send( embed = emb )
+
+@bot.command()
+async def hug(ctx, member: discord.Member):
+    hug = ["https://tenor.com/view/mochi-peachcat-mochi-peachcat-hug-pat-gif-19092449", "https://tenor.com/view/hug-anime-sweet-gif-10195705"]
+    await ctx.send(f"{ctx.author.mention} hugs {member.mention} very tightly..." + "\n" + random.choice(hug))
+
+
+@bot.command()
+async def slap( ctx, member : discord.Member ):
+   slap = ['https://tenor.com/view/slap-annoyed-irritated-kid-gif-5013065','https://tenor.com/view/kevin-hart-slap-face-your-charlie-gif-10570690', 'https://tenor.com/view/back-slap-backhand-funny-animals-penguin-slap-gif-11724800'
+   ]
+   await ctx.send(f" {ctx.author.mention} slaps {member.mention} in the face!" + "\n" + random.choice(slap))
+
+
+
+
+
+
+@bot.command()
+async def add(ctx, a: int, b: int):
+    await ctx.send(a + b)
+
+
+# Events
+@bot.event
+async def on_ready():
+    print('bot is ready')
+
+
+
+
+
+
+
+bot.run('(yourbottoken)')
